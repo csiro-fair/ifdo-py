@@ -1,3 +1,4 @@
+import contextlib
 from datetime import datetime, timezone
 from typing import Any
 
@@ -37,12 +38,10 @@ def _check_image_item(item: dict[str, Any], header_format: str) -> str:
     datetime_format: str = item.get("image-datetime-format", header_format)
 
     if "image-datetime" in item:
-        try:
+        with contextlib.suppress(ValueError, TypeError):
             item["image-datetime"] = datetime.strptime(
                 item["image-datetime"],
                 datetime_format,
             ).replace(tzinfo=timezone.utc)
-        except (ValueError, TypeError):
-            pass  # Leave as string; Pydantic handles ISO 8601 natively
 
     return datetime_format

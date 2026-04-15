@@ -26,6 +26,9 @@ def test_save_image():
     assert "_image_datetime_format" not in result["image-set-header"]
     assert result["image-set-header"]["image-datetime"] == "2025-01-01 01:01:01.100000"
 
+    schema = load_json("tests/schema/ifdo.json")
+    assert result["$schema"] == schema["$id"]
+
 
 def test_save_video():
     ifdo = create_ifdo()
@@ -78,17 +81,17 @@ def create_ifdo_item() -> ImageData:
 
 
 def validate_ifdo(ifdo: iFDO) -> None:
-    schema = load_json("tests/schema/ifdo-v2.1.0.json")
+    schema = load_json("tests/schema/ifdo.json")
 
     registry = Registry().with_resources(
         [
             (
-                "https://marine-imaging.com/fair/schemas/provenance.json",
-                Resource.from_contents(load_json("tests/schema/provenance-v0.1.0.json")),
+                "https://hdl.handle.net/20.500.12085/b28395e1-3b86-438e-b4c3-5a3e54b83273",
+                Resource.from_contents(load_json("tests/schema/provenance.json")),
             ),
             (
-                "https://marine-imaging.com/fair/schemas/annotation.json",
-                Resource.from_contents(load_json("tests/schema/annotation-v2.0.0.json")),
+                "https://hdl.handle.net/20.500.12085/b8861bdb-d608-433a-984e-6980206d9f29",
+                Resource.from_contents(load_json("tests/schema/annotation.json")),
             ),
         ]
     )

@@ -216,7 +216,7 @@ class ImageSetHeader(
     image_set_name: str
     image_set_uuid: str
     image_set_handle: str
-    image_set_ifdo_version: str = "v2.1.0"
+    image_set_ifdo_version: str = "v2.2.0"
 
     image_uuid: str | None = None
     image_hash_sha256: str | None = None
@@ -258,7 +258,11 @@ class iFDO(KebabCaseModel):  # noqa: N801
     def _serialize(self, nxt: SerializerFunctionWrapHandler) -> dict[str, Any]:
         ifdo = deepcopy(self)
         add_datetime_format_info(ifdo)
-        return cast("dict[str, Any]", nxt(ifdo))
+        serialized = cast("dict[str, Any]", nxt(ifdo))
+
+        serialized["$schema"] = "https://hdl.handle.net/20.500.12085/aad5955a-b88a-417d-b9c5-442accc67f2f"
+
+        return serialized
 
     @model_validator(mode="before")
     @classmethod
@@ -309,8 +313,7 @@ class iFDO(KebabCaseModel):  # noqa: N801
         """
         Save to a YAML or JSON file. Should have a suffix of `.yaml`, `.yml`, or `.json`.
 
-        Args:
-            path: Path to the file.
+        Args: path: Path to the file.
 
         Raises:
             ValueError: If the file format is not supported
