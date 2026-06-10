@@ -103,7 +103,7 @@ class ImageCoreFields(BaseModel):
     image_platform: ImageContext | None = None
     image_sensor: ImageContext | None = None
     image_pi: ImagePI | None = None
-    image_creators: list[ImageCreator] | None = None
+    image_creators: list[ImageCreator] | None = Field(None, min_length=1)
     image_license: ImageLicense | None = None
     image_copyright: str | None = None
     image_abstract: str | None = None

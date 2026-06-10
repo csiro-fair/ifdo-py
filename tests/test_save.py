@@ -6,12 +6,15 @@ from jsonschema import Draft202012Validator
 from referencing import Registry, Resource
 from ifdo import iFDO
 from ifdo.models import (
+    ImageCameraHousingViewport,
     ImageLicense,
     ImageContext,
     ImagePI,
     ImageCreator,
     ImageData,
     ImageSetHeader,
+    ImageStereoCameraCalibrationModel,
+    ViewportType,
 )
 
 OUTPUT_PATH = "/tmp/test_ifdo.json"
@@ -25,6 +28,7 @@ def test_save_image():
     result = ifdo.to_dict()
     assert "_image_datetime_format" not in result["image-set-header"]
     assert result["image-set-header"]["image-datetime"] == "2025-01-01 01:01:01.100000"
+    assert result["image-set-header"]["image-set-ifdo-version"] == "v2.2.1"
 
     schema = load_json("tests/schema/ifdo.json")
     assert result["$schema"] == schema["$id"]
@@ -63,6 +67,15 @@ def create_ifdo() -> iFDO:
     ifdo.image_set_header.image_coordinate_reference_system = "WSG84"
     ifdo.image_set_header.image_coordinate_uncertainty_meters = 0.1
     ifdo.image_set_header.image_datetime = datetime(2025, 1, 1, 1, 1, 1, 100000)
+    ifdo.image_set_header.image_camera_housing_viewport = ImageCameraHousingViewport(
+        viewport_type=ViewportType.DOME_PORT,
+        viewport_optical_density=1.52,
+        viewport_thickness_millimeter=10.0,
+    )
+    ifdo.image_set_header.image_stereo_camera_calibration_model = ImageStereoCameraCalibrationModel(
+        relative_orientation_matrix=[1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0],
+        relative_translation=[0.1, 0.0, 0.0],
+    )
 
     return ifdo
 
@@ -86,11 +99,11 @@ def validate_ifdo(ifdo: iFDO) -> None:
     registry = Registry().with_resources(
         [
             (
-                "https://hdl.handle.net/20.500.12085/b28395e1-3b86-438e-b4c3-5a3e54b83273",
+                "http://hdl.handle.net/20.500.12085/92a7fabf-3b11-498d-85af-d90d90a1ee07",
                 Resource.from_contents(load_json("tests/schema/provenance.json")),
             ),
             (
-                "https://hdl.handle.net/20.500.12085/b8861bdb-d608-433a-984e-6980206d9f29",
+                "http://hdl.handle.net/20.500.12085/dc57e639-4cf8-4f9a-982b-0cbb32366372",
                 Resource.from_contents(load_json("tests/schema/annotation.json")),
             ),
         ]

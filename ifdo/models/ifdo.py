@@ -100,6 +100,8 @@ class ImageData(
         image_flatport_parameters (ImageFlatportParameters | None): Parameters for flat port camera housings.
         image_domeport_parameters (ImageDomeportParameters | None): Parameters for dome port camera housings.
         image_camera_calibration_model (ImageCameraCalibrationModel | None): Camera calibration model information.
+        image_stereo_camera_calibration_model (ImageStereoCameraCalibrationModel | None): Stereo camera calibration
+            model information for rectifying stereo images.
         image_photometric_calibration (ImagePhotometricCalibration | None): Photometric calibration information.
         image_objective (str | None): Objective or purpose of the image capture.
         image_target_environment (str | None): Target environment for the image capture.
@@ -118,7 +120,7 @@ class ImageData(
         image_mpeg7_dominantcolor (list[float] | None): MPEG-7 dominant color descriptor.
         image_mpeg7_edgehistogram (list[float] | None): MPEG-7 edge histogram descriptor.
         image_mpeg7_homogenoustexture (list[float] | None): MPEG-7 homogeneous texture descriptor.
-        image_mpeg7_stablecolor (list[float] | None): MPEG-7 stable color descriptor.
+        image_mpeg7_scalablecolor (list[float] | None): MPEG-7 scalable color descriptor.
         image_annotation_labels (list[ImageAnnotationLabel] | None): List of annotation labels for the image.
         image_annotation_creators (list[ImageAnnotationCreator] | None): List of annotation creators.
         image_annotations (list[ImageAnnotation] | None): List of annotations for the image.
@@ -186,6 +188,8 @@ class ImageSetHeader(
         image_flatport_parameters (ImageFlatportParameters | None): Parameters for flat port camera housings.
         image_domeport_parameters (ImageDomeportParameters | None): Parameters for dome port camera housings.
         image_camera_calibration_model (ImageCameraCalibrationModel | None): Camera calibration model information.
+        image_stereo_camera_calibration_model (ImageStereoCameraCalibrationModel | None): Stereo camera calibration
+            model information for rectifying stereo images.
         image_photometric_calibration (ImagePhotometricCalibration | None): Photometric calibration information.
         image_objective (str | None): Objective or purpose of the image capture.
         image_target_environment (str | None): Target environment for the image capture.
@@ -204,7 +208,7 @@ class ImageSetHeader(
         image_mpeg7_dominantcolor (list[float] | None): MPEG-7 dominant color descriptor.
         image_mpeg7_edgehistogram (list[float] | None): MPEG-7 edge histogram descriptor.
         image_mpeg7_homogenoustexture (list[float] | None): MPEG-7 homogeneous texture descriptor.
-        image_mpeg7_stablecolor (list[float] | None): MPEG-7 stable color descriptor.
+        image_mpeg7_scalablecolor (list[float] | None): MPEG-7 scalable color descriptor.
         image_annotation_labels (list[ImageAnnotationLabel] | None): List of annotation labels for the image.
         image_annotation_creators (list[ImageAnnotationCreator] | None): List of annotation creators.
         image_annotations (list[ImageAnnotation] | None): List of annotations for the image.
@@ -216,7 +220,7 @@ class ImageSetHeader(
     image_set_name: str
     image_set_uuid: str
     image_set_handle: str
-    image_set_ifdo_version: str = "v2.2.0"
+    image_set_ifdo_version: str = "v2.2.1"
 
     image_uuid: str | None = None
     image_hash_sha256: str | None = None
@@ -260,7 +264,7 @@ class iFDO(KebabCaseModel):  # noqa: N801
         add_datetime_format_info(ifdo)
         serialized = cast("dict[str, Any]", nxt(ifdo))
 
-        serialized["$schema"] = "https://hdl.handle.net/20.500.12085/aad5955a-b88a-417d-b9c5-442accc67f2f"
+        serialized["$schema"] = "http://hdl.handle.net/20.500.12085/22aba7d7-c432-49ab-bebe-ee8ed4f70150"
 
         return serialized
 
@@ -313,7 +317,8 @@ class iFDO(KebabCaseModel):  # noqa: N801
         """
         Save to a YAML or JSON file. Should have a suffix of `.yaml`, `.yml`, or `.json`.
 
-        Args: path: Path to the file.
+        Args:
+            path: Path to the file.
 
         Raises:
             ValueError: If the file format is not supported

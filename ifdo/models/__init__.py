@@ -17,6 +17,8 @@ from ifdo.models.ifdo_capture import (
     ImageQuality,
     ImageScaleReference,
     ImageSpectralResolution,
+    ImageStereoCameraCalibrationModel,
+    ViewportType,
 )
 from ifdo.models.ifdo_content import AnnotationLabel, ImageAnnotation, ImageAnnotationCreator, ImageAnnotationLabel
 from ifdo.models.ifdo_core import ImageContext, ImageCreator, ImageLicense, ImagePI
@@ -49,4 +51,6 @@ __all__ = [
     "ImageScaleReference",
     "ImageSetHeader",
     "ImageSpectralResolution",
+    "ImageStereoCameraCalibrationModel",
+    "ViewportType",
 ]

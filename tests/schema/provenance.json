@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://hdl.handle.net/20.500.12085/b28395e1-3b86-438e-b4c3-5a3e54b83273",
+    "$id": "http://hdl.handle.net/20.500.12085/92a7fabf-3b11-498d-85af-d90d90a1ee07",
     "title": "Documenting a processing workflow",
     "description": "A schema to document the agents, activities and entities that led to an image set entity",
     "type": "object",

@@ -13,16 +13,20 @@ Classes:
     ImageSpectralResolution: Enumeration for image spectral resolution types.
     ImageCaptureMode: Enumeration for image capture modes.
     ImageFaunaAttraction: Enumeration for image fauna attraction types.
+    ViewportType: Enumeration for camera housing viewport geometries.
     ImageCameraPose: Represents a camera pose with UTM coordinates and orientation.
     ImageCameraHousingViewport: Represents a camera housing viewport.
     ImageFlatportParameters: Defines parameters for a flatport in an optical system.
     ImageDomeportParameters: Defines parameters for a domeport in an optical system.
     ImageCameraCalibrationModel: Defines a camera calibration model.
+    ImageStereoCameraCalibrationModel: Defines a stereo camera calibration model.
     ImagePhotometricCalibration: Represents photometric calibration parameters.
 """
 
 from enum import Enum
 from typing import Any
+
+from pydantic import Field
 
 from ifdo.models._kebab_case_model import KebabCaseModel
 
@@ -241,6 +245,24 @@ class ImageFaunaAttraction(str, Enum):
     LIGHT = "light"
 
 
+class ViewportType(str, Enum):
+    """
+    Define an enumeration for camera housing viewport geometries.
+
+    This class represents the geometric types of viewport defined by the iFDO standard (v2.2.0 onwards) for the
+    viewport-type field of image-camera-housing-viewport.
+
+    Attributes:
+        FLAT_PORT (str): A flat viewport.
+        DOME_PORT (str): A dome-shaped viewport.
+        OTHER (str): Any other viewport geometry.
+    """
+
+    FLAT_PORT = "flat port"
+    DOME_PORT = "dome port"
+    OTHER = "other"
+
+
 class ImageCameraPose(KebabCaseModel):
     """
     Represent a camera pose with UTM coordinates and orientation.
@@ -272,13 +294,13 @@ class ImageCameraHousingViewport(KebabCaseModel):
     such as the type of viewport, its optical density, thickness, and any additional descriptive information.
 
     Attributes:
-        viewport_type (str): The type of viewport material or design.
+        viewport_type (ViewportType): The geometric type of the viewport: flat port, dome port or other.
         viewport_optical_density (float): The optical density of the viewport material.
         viewport_thickness_millimeter (float): The thickness of the viewport in millimeters.
         viewport_extra_description (str | None): Additional description or notes about the viewport. Defaults to None.
     """
 
-    viewport_type: str
+    viewport_type: ViewportType
     viewport_optical_density: float
     viewport_thickness_millimeter: float
     viewport_extra_description: str | None = None
@@ -364,16 +386,13 @@ class ImageStereoCameraCalibrationModel(KebabCaseModel):
     stereo image, which enables the retrival of the transformation between the camera coordinates of two images.
 
     Attributes:
-        relative_orientation_matrix: Relative orientation matrix.
-        relative_translation: Relative translation vector.
+        relative_orientation_matrix: 3x3 row-major rotation matrix, given as a flat list of 9 numbers per the
+            iFDO schema.
+        relative_translation: Relative translation vector, given as a flat list of 3 numbers.
     """
 
-    relative_orientation_matrix: tuple[
-        tuple[float, float, float],
-        tuple[float, float, float],
-        tuple[float, float, float],
-    ]
-    relative_translation: tuple[float, float, float]
+    relative_orientation_matrix: list[float] = Field(min_length=9, max_length=9)
+    relative_translation: list[float] = Field(min_length=3, max_length=3)
 
 
 class ImagePhotometricCalibration(KebabCaseModel):
@@ -422,7 +441,7 @@ class ImageCaptureFields:
     image_camera_yaw_degrees: float | None = None
     image_camera_pitch_degrees: float | None = None
     image_camera_roll_degrees: float | None = None
-    image_overlap_fraction: float | None = None
+    image_overlap_fraction: float | None = Field(None, ge=0, le=1)
     image_camera_pose: ImageCameraPose | None = None
     image_camera_housing_viewport: ImageCameraHousingViewport | None = None
     image_flatport_parameters: ImageFlatportParameters | None = None

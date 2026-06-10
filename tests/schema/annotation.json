@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://hdl.handle.net/20.500.12085/b8861bdb-d608-433a-984e-6980206d9f29",
+    "$id": "http://hdl.handle.net/20.500.12085/dc57e639-4cf8-4f9a-982b-0cbb32366372",
     "title": "Annotations of images",
     "description": "A schema to establish a format for annotations within images (photos and videos) of different shape and by different annotators",
     "type": "object",

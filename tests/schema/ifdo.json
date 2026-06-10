@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://hdl.handle.net/20.500.12085/aad5955a-b88a-417d-b9c5-442accc67f2f",
+    "$id": "http://hdl.handle.net/20.500.12085/22aba7d7-c432-49ab-bebe-ee8ed4f70150",
     "title": "image FAIR Digital Object",
     "description": "An iFDO file is a human- and machine-readable file format collecting metadata of an entire image set, without including the actual image data, only references to it through persistent identifiers.",
     "type": "object",
@@ -76,7 +76,10 @@
                             "format": "uri",
                             "description": "A URI pointing to details of the context"
                         }
-                    }
+                    },
+                    "required": [
+                        "name"
+                    ]
                 },
                 "image-project": {
                     "description": "The more specific project or expedition or cruise or experiment or ... within which the image set was created.",
@@ -311,7 +314,7 @@
             "type": "object",
             "properties": {
                 "image-entropy": {
-                    "description": "Shannon entropy of the image or frame in bits. This quantifies the information content of the image or frame.",
+                    "description": "Normalized Shannon entropy of the image or frame. If the image or frame has multiple channels, the normalized Shannon entropy must be calculated from the grayscale representation of the image's or frame's luminance. This quantifies the information content of the image or frame.",
                     "type": "number",
                     "minimum": 0,
                     "maximum": 1
@@ -381,13 +384,13 @@
                     }
                 },
                 "image-annotation-labels": {
-                    "$ref": "https://hdl.handle.net/20.500.12085/b8861bdb-d608-433a-984e-6980206d9f29#/properties/image-annotation-labels"
+                    "$ref": "http://hdl.handle.net/20.500.12085/dc57e639-4cf8-4f9a-982b-0cbb32366372#/properties/image-annotation-labels"
                 },
                 "image-annotation-creators": {
-                    "$ref": "https://hdl.handle.net/20.500.12085/b8861bdb-d608-433a-984e-6980206d9f29#/properties/image-annotation-creators"
+                    "$ref": "http://hdl.handle.net/20.500.12085/dc57e639-4cf8-4f9a-982b-0cbb32366372#/properties/image-annotation-creators"
                 },
                 "image-annotations": {
-                    "$ref": "https://hdl.handle.net/20.500.12085/b8861bdb-d608-433a-984e-6980206d9f29#/properties/image-annotations"
+                    "$ref": "http://hdl.handle.net/20.500.12085/dc57e639-4cf8-4f9a-982b-0cbb32366372#/properties/image-annotations"
                 }
             }
         },
@@ -672,7 +675,7 @@
                 "image-overlap-fraction": {
                     "description": "The average overlap of two consecutive images i and j as the area images in both of the images (A_i * A_j) divided by the total area images by the two images (A_i + A_j - A_i * A_j): f = A_i * A_j / (A_i + A_j - A_i * A_j) -> 0 if no overlap. 1 if complete overlap",
                     "type": "number",
-                    "exclusiveMinimum": 0,
+                    "minimum": 0,
                     "maximum": 1
                 },
                 "image-datetime-format": {
@@ -995,7 +998,7 @@
                     }
                 },
                 "image-set-provenance": {
-                    "$ref": "https://hdl.handle.net/20.500.12085/b28395e1-3b86-438e-b4c3-5a3e54b83273"
+                    "$ref": "http://hdl.handle.net/20.500.12085/92a7fabf-3b11-498d-85af-d90d90a1ee07"
                 }
             },
             "@context": [
