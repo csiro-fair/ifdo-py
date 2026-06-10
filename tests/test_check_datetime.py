@@ -1,4 +1,5 @@
 from datetime import datetime, timezone
+from typing_extensions import cast
 
 from ifdo._datetime import check_datetime_format
 
@@ -35,9 +36,9 @@ def test_check_datetime_images() -> None:
         "image-set-items": {"image": {"image-datetime": "2015-01-01T20:21:32"}},
     }
     check_datetime_format(matching_data)
-    assert matching_data["image-set-items"]["image"]["image-datetime"] == datetime(
-        2015, 1, 1, 20, 21, 32, tzinfo=timezone.utc
-    )
+    assert cast(dict[str, dict[str, dict[str, str]]], matching_data["image-set-items"])["image"][
+        "image-datetime"
+    ] == datetime(2015, 1, 1, 20, 21, 32, tzinfo=timezone.utc)
 
     # Non-matching string: left as-is for Pydantic to handle (backwards-compat fallback)
     fallback_data = {
@@ -48,7 +49,10 @@ def test_check_datetime_images() -> None:
         "image-set-items": {"image": {"image-datetime": "2015-01-01 20:21:32"}},
     }
     check_datetime_format(fallback_data)
-    assert fallback_data["image-set-items"]["image"]["image-datetime"] == "2015-01-01 20:21:32"
+    assert (
+        cast(dict[str, dict[str, str]], fallback_data["image-set-items"])["image"]["image-datetime"]
+        == "2015-01-01 20:21:32"
+    )
 
 
 def test_check_datetime_videos() -> None:

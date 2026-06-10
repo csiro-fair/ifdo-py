@@ -355,6 +355,27 @@ class ImageCameraCalibrationModel(KebabCaseModel):
     calibration_model_extra_description: str | None = None
 
 
+class ImageStereoCameraCalibrationModel(KebabCaseModel):
+    """
+    Define a stereo camera calibration model with a relative orientation matrix and relative translation vector.
+
+    Information required to rectify stereo images given as rotations and translations from the camera coordiantes
+    to a coordinate system chosen by the author. The coordinate system must be the same for both images of a
+    stereo image, which enables the retrival of the transformation between the camera coordinates of two images.
+
+    Attributes:
+        relative_orientation_matrix: Relative orientation matrix.
+        relative_translation: Relative translation vector.
+    """
+
+    relative_orientation_matrix: tuple[
+        tuple[float, float, float],
+        tuple[float, float, float],
+        tuple[float, float, float],
+    ]
+    relative_translation: tuple[float, float, float]
+
+
 class ImagePhotometricCalibration(KebabCaseModel):
     """
     Represent photometric calibration parameters for image processing.
@@ -407,6 +428,7 @@ class ImageCaptureFields:
     image_flatport_parameters: ImageFlatportParameters | None = None
     image_domeport_parameters: ImageDomeportParameters | None = None
     image_camera_calibration_model: ImageCameraCalibrationModel | None = None
+    image_stereo_camera_calibration_model: ImageStereoCameraCalibrationModel | None = None
     image_photometric_calibration: ImagePhotometricCalibration | None = None
     image_objective: str | None = None
     image_target_environment: str | None = None
