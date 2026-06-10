@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: iFDO standard documentation
+    url: https://ifdo-schema.org/
+    about: Questions about the iFDO standard itself belong with the standard, not this library

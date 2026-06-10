@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: If you use ifdo-py in your work, please cite it using the metadata below, and consider also citing the iFDO standard paper (https://doi.org/10.1038/s41597-022-01491-3).
+title: "ifdo-py: a Python library for iFDO (image FAIR Digital Object) metadata files"
+type: software
+authors:
+  - family-names: Barnard
+    given-names: Kevin
+    affiliation: Monterey Bay Aquarium Research Institute (MBARI)
+  - family-names: Jackett
+    given-names: Chris
+    affiliation: Commonwealth Scientific and Industrial Research Organisation (CSIRO)
+    email: chris.jackett@csiro.au
+  - family-names: Schimpf
+    given-names: Karsten
+    affiliation: Alfred Wegener Institute (AWI)
+license: MIT
+repository-code: https://github.com/csiro-fair/ifdo-py
+url: https://pypi.org/project/ifdo/
+version: 1.5.0
+date-released: 2026-06-10
+keywords:
+  - iFDO
+  - FAIR
+  - marine imaging
+  - metadata
+  - image metadata
+  - python

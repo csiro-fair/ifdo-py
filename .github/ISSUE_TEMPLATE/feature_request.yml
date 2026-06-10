@@ -1,0 +1,31 @@
+name: Feature Request
+description: Suggest a new feature or enhancement
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      description: What problem does this solve? What use case motivates this?
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: checkboxes
+    id: context
+    attributes:
+      label: Applicable context
+      options:
+        - label: iFDO data model coverage
+        - label: iFDO schema version support
+        - label: Serialization / deserialization
+        - label: Validation
+        - label: API usability
