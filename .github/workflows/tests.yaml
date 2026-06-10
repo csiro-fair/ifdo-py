@@ -8,7 +8,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Install uv with cache
         uses: astral-sh/setup-uv@v5
