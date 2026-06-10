@@ -1,7 +1,7 @@
 [project]
 name = "ifdo"
 version = "1.5.0"
-description = "Python iFDO implementation"
+description = "A Python library for creating, validating and manipulating iFDO (image FAIR Digital Object) metadata files"
 readme = "README.md"
 authors = [
     {name = "Kevin Barnard", email = "kbarnard@mbari.org"},
@@ -10,11 +10,31 @@ authors = [
 ]
 license = {text = "MIT"}
 requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
 
 dependencies = [
     "pyyaml<7.0,>=6.0",
     "pydantic<3.0.0,>=2.4.2",
 ]
+
+[project.urls]
+"Homepage" = "https://github.com/csiro-fair/ifdo-py"
+"Repository" = "https://github.com/csiro-fair/ifdo-py"
+"Issues" = "https://github.com/csiro-fair/ifdo-py/issues"
+"Changelog" = "https://github.com/csiro-fair/ifdo-py/releases"
 
 [dependency-groups]
 dev = [
