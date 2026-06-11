@@ -101,11 +101,21 @@ class ImageContentFields:
     image_particle_count: int | None = None
     image_average_color: list[Annotated[int, Field(ge=0, le=255)]] | None = Field(None, min_length=1)
     image_mpeg7_colorlayout: list[float] | None = None
-    image_mpeg7_colorstatistics: list[float] | None = None
+    # The schema field is image-mpeg7-colorstatistic; the legacy plural image-mpeg7-colorstatistics
+    # is still accepted on load for files written by ifdo-py < 1.6.0.
+    image_mpeg7_colorstatistic: list[float] | None = Field(
+        None,
+        validation_alias=AliasChoices("image-mpeg7-colorstatistic", "image-mpeg7-colorstatistics"),
+    )
     image_mpeg7_colorstructure: list[float] | None = None
     image_mpeg7_dominantcolor: list[float] | None = None
     image_mpeg7_edgehistogram: list[float] | None = None
-    image_mpeg7_homogenoustexture: list[float] | None = None
+    # The schema field is image-mpeg7-homogeneoustexture; the legacy misspelling image-mpeg7-homogenoustexture
+    # is still accepted on load for files written by ifdo-py < 1.6.0.
+    image_mpeg7_homogeneoustexture: list[float] | None = Field(
+        None,
+        validation_alias=AliasChoices("image-mpeg7-homogeneoustexture", "image-mpeg7-homogenoustexture"),
+    )
     # The schema field is image-mpeg7-scalablecolor; the legacy misspelling image-mpeg7-stablecolor
     # is still accepted on load for files written by ifdo-py < 1.5.0.
     image_mpeg7_scalablecolor: list[float] | None = Field(

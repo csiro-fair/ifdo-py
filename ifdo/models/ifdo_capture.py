@@ -26,7 +26,7 @@ Classes:
 from enum import Enum
 from typing import Any
 
-from pydantic import Field
+from pydantic import AliasChoices, Field
 
 from ifdo.models._kebab_case_model import KebabCaseModel
 
@@ -421,6 +421,24 @@ class ImagePhotometricCalibration(KebabCaseModel):
     photometric_water_properties_description: str
 
 
+class RelatedMaterial(KebabCaseModel):
+    """
+    Represent a link to material related to an image set.
+
+    This class models a single entry of the image-set-related-material field, pointing to an external resource
+    (such as a publication, dataset, or software citation) that is related to the image set.
+
+    Attributes:
+        uri (str): The URI pointing to a related resource.
+        title (str): A name characterising the resource that is pointed to.
+        relation (str): A textual explanation of how this material is related to the image set.
+    """
+
+    uri: str
+    title: str
+    relation: str
+
+
 class ImageCaptureFields:
     """Image capture fields for iFDO objects."""
 
@@ -435,7 +453,10 @@ class ImageCaptureFields:
     image_spectral_resolution: ImageSpectralResolution | None = None
     image_capture_mode: ImageCaptureMode | None = None
     image_fauna_attraction: ImageFaunaAttraction | None = None
-    image_area_square_meter: float | None = None
+    image_area_square_meters: float | None = Field(
+        None,
+        validation_alias=AliasChoices("image-area-square-meters", "image-area-square-meter"),
+    )
     image_meters_above_ground: float | None = None
     image_acquisition_settings: dict[str, Any] | None = None
     image_camera_yaw_degrees: float | None = None
@@ -454,6 +475,15 @@ class ImageCaptureFields:
     image_target_timescale: str | None = None
     image_spatial_constraints: str | None = None
     image_temporal_constraints: str | None = None
-    image_time_synchronization: str | None = None
+    image_time_synchronisation: str | None = Field(
+        None,
+        validation_alias=AliasChoices("image-time-synchronisation", "image-time-synchronization"),
+    )
     image_item_identification_scheme: str | None = None
     image_curation_protocol: str | None = None
+    image_visual_constraints: str | None = None
+    image_set_related_material: list[RelatedMaterial] | None = None
+    image_set_min_latitude_degrees: float | None = Field(None, ge=-90, le=90)
+    image_set_max_latitude_degrees: float | None = Field(None, ge=-90, le=90)
+    image_set_min_longitude_degrees: float | None = Field(None, ge=-180, le=180)
+    image_set_max_longitude_degrees: float | None = Field(None, ge=-180, le=180)

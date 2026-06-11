@@ -86,7 +86,7 @@ class ImageData(
         image_spectral_resolution (ImageSpectralResolution | None): Spectral resolution of the image.
         image_capture_mode (ImageCaptureMode | None): Mode of image capture (e.g., continuous, triggered).
         image_fauna_attraction (ImageFaunaAttraction | None): Information about fauna attraction methods used.
-        image_area_square_meter (float | None): Area covered by the image in square meters.
+        image_area_square_meters (float | None): Area covered by the image in square meters.
         image_meters_above_ground (float | None): Height of the camera above the ground or sea floor.
         image_acquisition_settings (dict[str, Any] | None): Camera settings used during image acquisition.
         image_camera_yaw_degrees (float | None): Camera yaw angle in degrees.
@@ -108,18 +108,24 @@ class ImageData(
         image_target_timescale (str | None): Target timescale for the image capture.
         image_spatial_constraints (str | None): Spatial constraints for the image capture.
         image_temporal_constraints (str | None): Temporal constraints for the image capture.
-        image_time_synchronization (str | None): Method used for time synchronization.
+        image_time_synchronisation (str | None): Synchronisation procedure and time offsets between camera and UTC.
+        image_visual_constraints (str | None): How the images may be degraded (turbidity, blocked view).
+        image_set_related_material (list[RelatedMaterial] | None): Links to resources related to the image set.
+        image_set_min_latitude_degrees (float | None): Lower bounding-box latitude enclosing all images in the set.
+        image_set_max_latitude_degrees (float | None): Upper bounding-box latitude enclosing all images in the set.
+        image_set_min_longitude_degrees (float | None): Lower bounding-box longitude enclosing all images in the set.
+        image_set_max_longitude_degrees (float | None): Upper bounding-box longitude enclosing all images in the set.
         image_item_identification_scheme (str | None): Scheme used for identifying items in the image.
         image_curation_protocol (str | None): Protocol used for image curation.
         image_entropy (float | None): Entropy value of the image.
         image_particle_count (int | None): Count of particles detected in the image.
         image_average_color (list[int] | None): Average color of the image as RGB values.
         image_mpeg7_colorlayout (list[float] | None): MPEG-7 color layout descriptor.
-        image_mpeg7_colorstatistics (list[float] | None): MPEG-7 color statistics descriptor.
+        image_mpeg7_colorstatistic (list[float] | None): MPEG-7 color statistics descriptor.
         image_mpeg7_colorstructure (list[float] | None): MPEG-7 color structure descriptor.
         image_mpeg7_dominantcolor (list[float] | None): MPEG-7 dominant color descriptor.
         image_mpeg7_edgehistogram (list[float] | None): MPEG-7 edge histogram descriptor.
-        image_mpeg7_homogenoustexture (list[float] | None): MPEG-7 homogeneous texture descriptor.
+        image_mpeg7_homogeneoustexture (list[float] | None): MPEG-7 homogeneous texture descriptor.
         image_mpeg7_scalablecolor (list[float] | None): MPEG-7 scalable color descriptor.
         image_annotation_labels (list[ImageAnnotationLabel] | None): List of annotation labels for the image.
         image_annotation_creators (list[ImageAnnotationCreator] | None): List of annotation creators.
@@ -174,7 +180,7 @@ class ImageSetHeader(
         image_spectral_resolution (ImageSpectralResolution | None): Spectral resolution of the image.
         image_capture_mode (ImageCaptureMode | None): Mode of image capture (e.g., continuous, triggered).
         image_fauna_attraction (ImageFaunaAttraction | None): Information about fauna attraction methods used.
-        image_area_square_meter (float | None): Area covered by the image in square meters.
+        image_area_square_meters (float | None): Area covered by the image in square meters.
         image_meters_above_ground (float | None): Height of the camera above the ground or sea floor.
         image_acquisition_settings (dict[str, Any] | None): Camera settings used during image acquisition.
         image_camera_yaw_degrees (float | None): Camera yaw angle in degrees.
@@ -196,18 +202,24 @@ class ImageSetHeader(
         image_target_timescale (str | None): Target timescale for the image capture.
         image_spatial_constraints (str | None): Spatial constraints for the image capture.
         image_temporal_constraints (str | None): Temporal constraints for the image capture.
-        image_time_synchronization (str | None): Method used for time synchronization.
+        image_time_synchronisation (str | None): Synchronisation procedure and time offsets between camera and UTC.
+        image_visual_constraints (str | None): How the images may be degraded (turbidity, blocked view).
+        image_set_related_material (list[RelatedMaterial] | None): Links to resources related to the image set.
+        image_set_min_latitude_degrees (float | None): Lower bounding-box latitude enclosing all images in the set.
+        image_set_max_latitude_degrees (float | None): Upper bounding-box latitude enclosing all images in the set.
+        image_set_min_longitude_degrees (float | None): Lower bounding-box longitude enclosing all images in the set.
+        image_set_max_longitude_degrees (float | None): Upper bounding-box longitude enclosing all images in the set.
         image_item_identification_scheme (str | None): Scheme used for identifying items in the image.
         image_curation_protocol (str | None): Protocol used for image curation.
         image_entropy (float | None): Entropy value of the image.
         image_particle_count (int | None): Count of particles detected in the image.
         image_average_color (list[int] | None): Average color of the image as RGB values.
         image_mpeg7_colorlayout (list[float] | None): MPEG-7 color layout descriptor.
-        image_mpeg7_colorstatistics (list[float] | None): MPEG-7 color statistics descriptor.
+        image_mpeg7_colorstatistic (list[float] | None): MPEG-7 color statistics descriptor.
         image_mpeg7_colorstructure (list[float] | None): MPEG-7 color structure descriptor.
         image_mpeg7_dominantcolor (list[float] | None): MPEG-7 dominant color descriptor.
         image_mpeg7_edgehistogram (list[float] | None): MPEG-7 edge histogram descriptor.
-        image_mpeg7_homogenoustexture (list[float] | None): MPEG-7 homogeneous texture descriptor.
+        image_mpeg7_homogeneoustexture (list[float] | None): MPEG-7 homogeneous texture descriptor.
         image_mpeg7_scalablecolor (list[float] | None): MPEG-7 scalable color descriptor.
         image_annotation_labels (list[ImageAnnotationLabel] | None): List of annotation labels for the image.
         image_annotation_creators (list[ImageAnnotationCreator] | None): List of annotation creators.

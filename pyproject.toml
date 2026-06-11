@@ -1,6 +1,6 @@
 [project]
 name = "ifdo"
-version = "1.5.0"
+version = "1.6.0"
 description = "A Python library for creating, validating and manipulating iFDO (image FAIR Digital Object) metadata files"
 readme = "README.md"
 authors = [
