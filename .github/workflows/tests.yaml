@@ -18,6 +18,6 @@ jobs:
           cache-dependency-glob: "uv.lock"
 
       - name: Install nox
-        uses: wntrblm/nox@2026.04.10
+        uses: wntrblm/nox@2026.07.11
 
       - run: nox
